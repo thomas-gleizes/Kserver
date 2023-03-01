@@ -1,18 +1,22 @@
 {
-  "name": "@kserver/core",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@kalat/kserver",
+  "version": "0.1.0",
+  "description": "A simple http server for nodejs made with typescript for the fun",
+  "keywords": [
+    "http",
+    "server",
+    "nodejs",
+    "typescript",
+    "kserver"
+  ],
+  "author": "thomas-gleizes",
+  "license": "GPL-3.0-only",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "module": "dist/index.mjs",
   "scripts": {
     "build": "tsup src/index.ts --dts --format cjs,esm --sourcemap"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.14.2",
     "@swc/core": "^1.2.109",

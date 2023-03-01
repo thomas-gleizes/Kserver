@@ -1,10 +1,16 @@
 {
   "name": "kserver",
-  "version": "1.0.0",
-  "description": "a simple http server",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "version": "0.1.0",
+  "description": "monorepo for kserver",
+  "keywords": [
+    "kserver",
+    "http",
+    "typescript",
+    "javascript"
+  ],
+  "repository": "https://github.com/thomas-gleizes/Kserver.git",
+  "author": "thomas-gleizes",
+  "license": "GPL-3.0-or-later",
   "devDependencies": {
     "eslint": "^8.35.0",
     "prettier": "^2.8.4"

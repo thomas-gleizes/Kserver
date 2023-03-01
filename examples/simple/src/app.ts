@@ -1,6 +1,20 @@
-import { KResponse, KServer } from "@kserver/core";
+import { Exception, KResponse, KServer } from "@kalat/kserver";
+import * as http from "http";
 
 const server = new KServer();
+
+// server.exceptionHandler((error, request, response) => {
+//   if (error instanceof Exception) {
+//     return void response.status(505).send({
+//       success: false,
+//       message: "erreur controlée",
+//     });
+//   }
+//
+//   return void response
+//     .status(500)
+//     .send({ success: false, message: "erreur non controlée" });
+// });
 
 server.get(
   "/",
@@ -11,5 +25,9 @@ server.get(
     });
   }
 );
+
+server.get("/error", (request, response) => {
+  throw new Error("Error");
+});
 
 server.listen(8000).then(({ url }) => console.log("server start on " + url));

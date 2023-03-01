@@ -16,3 +16,9 @@ export declare type Handler<Core extends HandlerCore = {}> = (
 export declare type ListenResult = {
   url: string;
 };
+
+export declare type ExceptionHandler = (
+  error: Error,
+  request: KRequest,
+  response: KResponse
+) => void | Promise<void>;
