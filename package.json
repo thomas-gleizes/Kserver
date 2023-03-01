@@ -1,0 +1,12 @@
+{
+  "name": "kserver",
+  "version": "1.0.0",
+  "description": "a simple http server",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "prettier": "^2.8.4"
+  }
+}
