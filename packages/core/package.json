@@ -15,7 +15,8 @@
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
   "scripts": {
-    "build": "tsup src/index.ts --dts --format cjs,esm --sourcemap"
+    "clean": "rm -r dist",
+    "build": "pnpm clean && tsup src/index.ts --dts --format cjs,esm --sourcemap"
   },
   "devDependencies": {
     "@types/node": "^18.14.2",

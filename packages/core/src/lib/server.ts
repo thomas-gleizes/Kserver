@@ -1,6 +1,12 @@
 import { createServer } from "node:http";
 
-import { ExceptionHandler, Handler, ListenResult } from "./types";
+import {
+  ExceptionHandler,
+  Handler,
+  ListenResult,
+  PluginHandler,
+  PluginOptions,
+} from "./types";
 import KRequest from "./request";
 import KResponse from "./response";
 import Route from "./route";
@@ -9,14 +15,21 @@ import Exception from "./exception";
 
 export default class KServer {
   private readonly _routes: Array<Route>;
+  private readonly _plugins: Array<[PluginHandler, PluginOptions]>;
   private _exceptionHandler?: ExceptionHandler;
 
   constructor() {
     this._routes = [];
+    this._plugins = [];
+
     this._exceptionHandler = undefined;
   }
 
-  private addRoute(pathname: string, method: Method, ...handlers: Handler[]) {
+  private addRoute(
+    pathname: string,
+    method: Method,
+    ...handlers: Handler[]
+  ): void {
     if (handlers.length === 0)
       throw new Exception(
         "You must provide at least one handler for this route."
@@ -50,6 +63,15 @@ export default class KServer {
     return this;
   }
 
+  public register<Options = unknown>(
+    plugin: PluginHandler,
+    options?: PluginOptions
+  ): KServer {
+    // @ts-ignore
+    this._plugins.push([plugin, options]);
+    return this;
+  }
+
   public exceptionHandler(handler: ExceptionHandler): KServer {
     this._exceptionHandler = handler;
 
@@ -68,9 +90,8 @@ export default class KServer {
           if (route.isMatch(request.url as string, request.method as Method)) {
             isMatched = true;
 
-            for (const handler of route.getHandlers()) {
+            for (const handler of route.getHandlers())
               await handler(request, response);
-            }
           }
         }
 

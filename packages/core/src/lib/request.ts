@@ -21,6 +21,10 @@ export default class KRequest<Core extends RequestCore = {}> {
     return this._request.method as Method;
   }
 
+  get headers(): IncomingMessage["headers"] {
+    return this._request.headers;
+  }
+
   get body(): RequestCore["Body"] {
     if ([Method.GET, Method.DELETE].includes(this.method)) return undefined;
 
@@ -30,6 +34,8 @@ export default class KRequest<Core extends RequestCore = {}> {
     req.on("readable", () => {
       body += req.read();
     });
+
+    console.log("Body", body);
 
     return body as RequestCore["Body"];
   }
